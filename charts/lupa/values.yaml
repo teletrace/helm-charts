@@ -14,7 +14,6 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-# Temporary, until configs merge: https://github.com/epsagon/lupa/issues/444
 collectorConfig:
   receivers:
     otlp:
