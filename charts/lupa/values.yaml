@@ -13,3 +13,22 @@ serviceAccount:
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
+
+# Temporary, until configs merge: https://github.com/epsagon/lupa/issues/444
+collectorConfig:
+  receivers:
+    otlp:
+      protocols:
+        grpc:
+        http:
+  processors:
+    batch:
+  exporters:
+    # elasticsearch:
+      # endpoints: ["http://elasticsearch:9200/"]
+  service:
+    pipelines:
+      traces:
+        receivers: [otlp]
+        processors: [batch]
+        # exporters: [elasticsearch]
