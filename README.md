@@ -1,6 +1,6 @@
 # Lupa Helm Charts
 
-This repository contains [Helm](https://helm.sh) charts for [Lupa](https://github.com/epsagon/lupa) project.
+This repository contains [Helm](https://helm.sh) charts for the [Lupa](https://github.com/epsagon/lupa) project.
 
 ## Usage
 
