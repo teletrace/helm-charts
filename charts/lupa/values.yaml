@@ -48,15 +48,15 @@ ingress:
   hosts: []
   #   - host: lupa.example.com
   #     paths:
+  #       - path: /
+  #         pathType: Prefix
+  #         port: 8080
   #       - path: /grpc
   #         pathType: Prefix
   #         port: 4317
   #       - path: /http
   #         pathType: Prefix
   #         port: 4318
-  #       - path: /api
-  #         pathType: Prefix
-  #         port: 8080
   tls: []
   #   - secretName: lupa-tls
   #     hosts:
