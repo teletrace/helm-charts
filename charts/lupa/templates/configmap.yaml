@@ -6,4 +6,4 @@ metadata:
     {{- include "lupa.labels" . | nindent 4 }}
 data:
   collector-config.yaml: |
-    {{- toYaml .Values.collectorConfig | nindent 4 }}
+    {{- .Values.collectorConfig | nindent 4 }}
