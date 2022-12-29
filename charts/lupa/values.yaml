@@ -67,7 +67,7 @@ env:
   API_PORT: "8080"
   # ES_ENDPOINT: "http://elasticsearch:9200"
 
-collectorConfig:
+collectorConfig: |
   receivers:
     otlp:
       protocols:
