@@ -1,0 +1,7 @@
+**********************************************************
+ Welcome to Lupa!
+ Chart version: {{ .Chart.Version }}
+ Lupa version: {{ .Values.image.tag | default .Chart.AppVersion }}
+
+ Learn more about Lupa at https://github.com/epsagon/lupa
+**********************************************************
