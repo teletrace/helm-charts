@@ -1,33 +1,39 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "lupa.fullname" . -}}
-{{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
-  {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
-  {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
+{{- $kubeVersion := .Capabilities.KubeVersion.GitVersion -}}
+{{- $ingresses := prepend .Values.ingress.additionalIngresses .Values.ingress -}}
+{{- range $ingresses }}
+{{- if and .className (not (semverCompare ">=1.18-0" $kubeVersion)) }}
+  {{- if not (hasKey .annotations "kubernetes.io/ingress.class") }}
+  {{- $_ := set .annotations "kubernetes.io/ingress.class" .className}}
   {{- end }}
 {{- end }}
-{{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
+{{- if semverCompare ">=1.19-0" $kubeVersion -}}
 apiVersion: networking.k8s.io/v1
-{{- else if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
+{{- else if semverCompare ">=1.14-0" $kubeVersion -}}
 apiVersion: networking.k8s.io/v1beta1
 {{- else -}}
 apiVersion: extensions/v1beta1
 {{- end }}
 kind: Ingress
 metadata:
-  name: {{ $fullName }}
+  {{- if .name }}
+  name: {{ printf "%s-%s" (include "lupa.fullname" $) .name }}
+  {{- else }}
+  name: {{ include "lupa.fullname" $ }}
+  {{- end }}
   labels:
-    {{- include "lupa.labels" . | nindent 4 }}
-  {{- with .Values.ingress.annotations }}
+    {{- include "lupa.labels" $ | nindent 4 }}
+  {{- with .annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  {{- if and .Values.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
-  ingressClassName: {{ .Values.ingress.className }}
+  {{- if and .className (semverCompare ">=1.18-0" $kubeVersion) }}
+  ingressClassName: {{ .className }}
   {{- end }}
-  {{- if .Values.ingress.tls }}
+  {{- if .tls }}
   tls:
-    {{- range .Values.ingress.tls }}
+    {{- range .tls }}
     - hosts:
         {{- range .hosts }}
         - {{ . | quote }}
@@ -36,25 +42,27 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    {{- range .Values.ingress.hosts }}
+    {{- range .hosts }}
     - host: {{ .host | quote }}
       http:
         paths:
           {{- range .paths }}
           - path: {{ .path }}
-            {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
+            {{- if and .pathType (semverCompare ">=1.18-0" $kubeVersion) }}
             pathType: {{ .pathType }}
             {{- end }}
             backend:
-              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              {{- if semverCompare ">=1.19-0" $kubeVersion }}
               service:
-                name: {{ $fullName }}
+                name: {{ include "lupa.fullname" $ }}
                 port:
                   number: {{ .port }}
               {{- else }}
-              serviceName: {{ $fullName }}
+              serviceName: {{ include "lupa.fullname" $ }}
               servicePort: {{ .port }}
               {{- end }}
           {{- end }}
     {{- end }}
+---
+{{- end }}
 {{- end }}
