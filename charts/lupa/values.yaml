@@ -61,6 +61,20 @@ ingress:
   #   - secretName: lupa-tls
   #     hosts:
   #       - lupa.example.com
+  additionalIngresses: []
+  # - name: otlp-http
+  #   className: nginx
+  #   annotations: {}
+  #   hosts:
+  #     - host: lupa.example.com
+  #       paths:
+  #         - path: /
+  #           pathType: Prefix
+  #           port: 4318
+  #   tls:
+  #     - secretName: lupa-tls
+  #       hosts:
+  #         - lupa.example.com
 
 env:
   DEBUG: "false"
