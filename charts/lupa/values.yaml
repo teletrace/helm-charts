@@ -2,85 +2,116 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+# -- Overrides the chart name
 nameOverride: ""
+# -- Overrides the chart computed fullname
 fullnameOverride: ""
 
 image:
+  # -- Image repository
   repository: epsagon/lupa
+  # -- Image pull policy
   pullPolicy: IfNotPresent
+  # -- Image tag.
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
+# -- Image pull secrets for the image registry
 imagePullSecrets: []
 
 serviceAccount:
-  # Specifies whether a service account should be created
+  # -- Specifies whether a service account should be created
   create: true
-  # Annotations to add to the service account
+  # -- Annotations to add to the service account
   annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template.
   name: ""
 
 ports:
-  otlp-grpc:
+  lupa-api:
+    # -- Whether to enable port for the API (+frontend)
     enabled: true
+    # -- Container port for API
+    containerPort: 8080
+    # -- Service port for API
+    servicePort: 8080
+    # -- Protocol to use for API
+    protocol: TCP
+  otlp-grpc:
+    # -- Whether to enable port for OTLP gRPC
+    enabled: true
+    # -- Container port for OTLP gRPC
     containerPort: 4317
+    # -- Service port for OTLP gRPC
     servicePort: 4317
+    # -- Protocol to use for OTLP gRPC
     protocol: TCP
   otlp-http:
+    # -- Whether to enable port for OTLP HTTP
     enabled: true
+    # -- Container port for OTLP HTTP
     containerPort: 4318
+    # -- Service port for OTLP HTTP
     servicePort: 4318
-    protocol: TCP
-  lupa-api:
-    enabled: true
-    containerPort: 8080
-    servicePort: 8080
+    # -- Protocol to use for OTLP HTTP
     protocol: TCP
 
 ingress:
+  # -- Whether to enable ingress
   enabled: false
+  # -- Ingress class name to identify ingress controllers
   className: "" # nginx
+  # -- Annotations for ingress
   annotations: {}
   #  kubernetes.io/ingress.class: nginx
-  #  kubernetes.io/tls-acme: "true"
+
+  # -- Ingress host names with their path names
   hosts: []
-  #   - host: lupa.example.com
+  #   - host: example.com
   #     paths:
   #       - path: /
   #         pathType: Prefix
   #         port: 8080
-  #       - path: /grpc
-  #         pathType: Prefix
-  #         port: 4317
-  #       - path: /http
-  #         pathType: Prefix
+  #       - path: /v1/traces
+  #         pathType: Exact
   #         port: 4318
+
+  # -- Ingress TLS configuration
   tls: []
   #   - secretName: lupa-tls
   #     hosts:
-  #       - lupa.example.com
-  additionalIngresses: []
-  # - name: otlp-http
-  #   className: nginx
-  #   annotations: {}
-  #   hosts:
-  #     - host: lupa.example.com
-  #       paths:
-  #         - path: /
-  #           pathType: Prefix
-  #           port: 4318
-  #   tls:
-  #     - secretName: lupa-tls
-  #       hosts:
-  #         - lupa.example.com
+  #       - example.com
 
+  # -- Additional ingresses for when differently annotated ingress services are required.
+  # Each additional ingress needs "name" key set to something unique.
+  # Created if ingress.enabled set to true.
+  additionalIngresses: []
+  #   - name: otlp-grpc
+  #     className: nginx
+  #     annotations:
+  #       nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  #       nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+  #     hosts:
+  #       - host: grpc.example.com
+  #         paths:
+  #           - path: /
+  #             pathType: Prefix
+  #             port: 4318
+  #     tls:
+  #       - secretName: lupa-tls
+  #         hosts:
+  #           - grpc.example.com
+
+# -- Environment variables to add
 env:
   DEBUG: "false"
   API_PORT: "8080"
-  # ES_ENDPOINT: "http://elasticsearch:9200"
+  # ES_ENDPOINT: "http://elastic-svc.elastic-ns:9200/"
+  # ES_USERNAME: "elastic"
+  # ES_PASSWORD: "password"
 
+# -- Lupa OpenTelemetry collector config
 collectorConfig: |
   receivers:
     otlp:
@@ -91,7 +122,9 @@ collectorConfig: |
     batch:
   exporters:
     # elasticsearch:
-    #   endpoints: ["http://elasticsearch:9200/"]
+    #   endpoints: ["http://elastic-svc.elastic-ns:9200/"]
+    #   username: "elastic"
+    #   password: "password"
   service:
     pipelines:
       traces:
@@ -99,25 +132,39 @@ collectorConfig: |
         processors: [batch]
         # exporters: [elasticsearch]
 
+# -- Resource requests and limits
 resources: {}
 
+# -- Number of replicas to use.
+# Ignored if `autoscaling.enabled` is set to `true`.
 replicaCount: 1
 
 autoscaling:
+  # -- Whether to enable deployment autoscaling
   enabled: false
+  # -- Minimum autoscaling replicas
   minReplicas: 1
+  # -- Maximum autoscaling replicas
   maxReplicas: 10
+  # -- Target CPU utilization percentage
   targetCPUUtilizationPercentage: 80
+  # -- Target memory utilization percentage
   targetMemoryUtilizationPercentage:
 
+# -- Annotations for pods
 podAnnotations: {}
 
+# -- Pod-level security configuration
 podSecurityContext: {}
 
+# -- Container-level security configuration
 securityContext: {}
 
+# -- Node selector for pods
 nodeSelector: {}
 
+# -- Tolerations for pods
 tolerations: []
 
+# -- Affinity configuration for pods
 affinity: {}
