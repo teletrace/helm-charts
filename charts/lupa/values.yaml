@@ -148,7 +148,7 @@ autoscaling:
   maxReplicas: 10
   # -- Target CPU utilization percentage
   targetCPUUtilizationPercentage: 80
-  # -- Target memory utilization percentage
+  # -- (int) Target memory utilization percentage
   targetMemoryUtilizationPercentage:
 
 # -- Annotations for pods

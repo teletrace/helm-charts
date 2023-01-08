@@ -13,7 +13,7 @@ Lupa Helm chart for Kubernetes
 | autoscaling.maxReplicas | int | `10` | Maximum autoscaling replicas |
 | autoscaling.minReplicas | int | `1` | Minimum autoscaling replicas |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` | Target CPU utilization percentage |
-| autoscaling.targetMemoryUtilizationPercentage | string | `nil` | Target memory utilization percentage |
+| autoscaling.targetMemoryUtilizationPercentage | int | `nil` | Target memory utilization percentage |
 | collectorConfig | string | `"receivers:\n  otlp:\n    protocols:\n      grpc:\n      http:\nprocessors:\n  batch:\nexporters:\n  # elasticsearch:\n  #   endpoints: [\"http://elastic-svc.elastic-ns:9200/\"]\n  #   username: \"elastic\"\n  #   password: \"password\"\nservice:\n  pipelines:\n    traces:\n      receivers: [otlp]\n      processors: [batch]\n      # exporters: [elasticsearch]\n"` | Lupa OpenTelemetry collector config |
 | env | object | `{"API_PORT":"8080","DEBUG":"false"}` | Environment variables to add |
 | fullnameOverride | string | `""` | Overrides the chart computed fullname |
