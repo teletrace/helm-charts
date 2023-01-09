@@ -3,6 +3,16 @@ entries:
   lupa:
   - apiVersion: v2
     appVersion: v0.0.1
+    created: "2023-01-09T10:40:35.788361341Z"
+    description: Lupa Helm chart for Kubernetes
+    digest: 0f0290cd9957ff6049338e032f5dfd6d51c4b57a18dcdd3c69156b1d64af0a6c
+    name: lupa
+    type: application
+    urls:
+    - https://github.com/epsagon/lupa-helm-charts/releases/download/lupa-0.2.0/lupa-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: v0.0.1
     created: "2023-01-01T09:58:06.441406409Z"
     description: Lupa Helm chart for Kubernetes
     digest: a44813c887e21012f0961376b3ea640287244852b456e830a7395c19f0fbf3be
@@ -11,4 +21,4 @@ entries:
     urls:
     - https://github.com/epsagon/lupa-helm-charts/releases/download/lupa-0.1.0/lupa-0.1.0.tgz
     version: 0.1.0
-generated: "2023-01-01T09:58:06.441416009Z"
+generated: "2023-01-09T10:40:35.788375242Z"
