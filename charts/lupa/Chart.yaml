@@ -1,6 +1,6 @@
 apiVersion: v2
-name: lupa
-description: Lupa Helm chart for Kubernetes
+name: teletrace
+description: Teletrace Helm chart for Kubernetes
 type: application
 version: 0.3.0
 appVersion: "v0.5.0"

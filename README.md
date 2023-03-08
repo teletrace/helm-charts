@@ -1,6 +1,6 @@
-# Lupa Helm Charts
+# Teletrace Helm Charts
 
-This repository contains [Helm](https://helm.sh) charts for the [Lupa](https://github.com/epsagon/lupa) project.
+This repository contains [Helm](https://helm.sh) charts for the [Teletrace](https://github.com/epsagon/lupa) project.
 
 ## Usage
 
@@ -10,9 +10,9 @@ Please refer to Helm's [documentation](https://helm.sh/docs) to get started.
 Once Helm has been set up correctly, add the repo as follows:
 
 ```sh
-helm repo add lupa https://epsagon.github.io/lupa-helm-charts
+helm repo add teletrace https://epsagon.github.io/lupa-helm-charts
 ```
 
 If you had already added this repo earlier, run `helm repo update` to retrieve
 the latest versions of the packages.\
-You can then run `helm search repo lupa` to see the charts.
+You can then run `helm search repo teletrace` to see the charts.

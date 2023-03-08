@@ -1,8 +1,8 @@
-# lupa
+# teletrace
 
 ![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![AppVersion: v0.0.1](https://img.shields.io/badge/AppVersion-v0.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
-Lupa Helm chart for Kubernetes
+Teletrace Helm chart for Kubernetes
 
 ## Values
 
@@ -14,7 +14,7 @@ Lupa Helm chart for Kubernetes
 | autoscaling.minReplicas | int | `1` | Minimum autoscaling replicas |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` | Target CPU utilization percentage |
 | autoscaling.targetMemoryUtilizationPercentage | int | `nil` | Target memory utilization percentage |
-| collectorConfig | string | `"receivers:\n  otlp:\n    protocols:\n      grpc:\n      http:\nprocessors:\n  batch:\nexporters:\n  # elasticsearch:\n  #   endpoints: [\"http://elastic-svc.elastic-ns:9200/\"]\n  #   username: \"elastic\"\n  #   password: \"password\"\nservice:\n  pipelines:\n    traces:\n      receivers: [otlp]\n      processors: [batch]\n      # exporters: [elasticsearch]\n"` | Lupa OpenTelemetry collector config |
+| collectorConfig | string | `"receivers:\n  otlp:\n    protocols:\n      grpc:\n      http:\nprocessors:\n  batch:\nexporters:\n  # elasticsearch:\n  #   endpoints: [\"http://elastic-svc.elastic-ns:9200/\"]\n  #   username: \"elastic\"\n  #   password: \"password\"\nservice:\n  pipelines:\n    traces:\n      receivers: [otlp]\n      processors: [batch]\n      # exporters: [elasticsearch]\n"` | Teletrace OpenTelemetry collector config |
 | env | object | `{"API_PORT":"8080","DEBUG":"false"}` | Environment variables to add |
 | fullnameOverride | string | `""` | Overrides the chart computed fullname |
 | image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
@@ -31,10 +31,10 @@ Lupa Helm chart for Kubernetes
 | nodeSelector | object | `{}` | Node selector for pods |
 | podAnnotations | object | `{}` | Annotations for pods |
 | podSecurityContext | object | `{}` | Pod-level security configuration |
-| ports.lupa-api.containerPort | int | `8080` | Container port for API |
-| ports.lupa-api.enabled | bool | `true` | Whether to enable port for the API (+frontend) |
-| ports.lupa-api.protocol | string | `"TCP"` | Protocol to use for API |
-| ports.lupa-api.servicePort | int | `8080` | Service port for API |
+| ports.teletrace-api.containerPort | int | `8080` | Container port for API |
+| ports.teletrace-api.enabled | bool | `true` | Whether to enable port for the API (+frontend) |
+| ports.teletrace-api.protocol | string | `"TCP"` | Protocol to use for API |
+| ports.teletrace-api.servicePort | int | `8080` | Service port for API |
 | ports.otlp-grpc.containerPort | int | `4317` | Container port for OTLP gRPC |
 | ports.otlp-grpc.enabled | bool | `true` | Whether to enable port for OTLP gRPC |
 | ports.otlp-grpc.protocol | string | `"TCP"` | Protocol to use for OTLP gRPC |
