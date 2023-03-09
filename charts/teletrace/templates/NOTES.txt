@@ -1,0 +1,7 @@
+**********************************************************
+ Welcome to Teletrace!
+ Chart version: {{ .Chart.Version }}
+ Teletrace version: {{ .Values.image.tag | default .Chart.AppVersion }}
+
+ Learn more about Teletrace at https://github.com/epsagon/lupa
+**********************************************************

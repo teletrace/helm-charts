@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "lupa.fullname" . }}
+  name: {{ include "teletrace.fullname" . }}
   labels:
-    {{- include "lupa.labels" . | nindent 4 }}
+    {{- include "teletrace.labels" . | nindent 4 }}
 data:
   collector-config.yaml: |
     {{- .Values.collectorConfig | nindent 4 }}

@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "lupa.fullname" . }}
+  name: {{ include "teletrace.fullname" . }}
   labels:
-    {{- include "lupa.labels" . | nindent 4 }}
+    {{- include "teletrace.labels" . | nindent 4 }}
 spec:
   clusterIP: None
   ports:
@@ -16,4 +16,4 @@ spec:
     {{- end }}
     {{- end }}
   selector:
-    {{- include "lupa.selectorLabels" . | nindent 4 }}
+    {{- include "teletrace.selectorLabels" . | nindent 4 }}

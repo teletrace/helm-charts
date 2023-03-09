@@ -1,4 +1,4 @@
-# Default values for lupa.
+# Default values for teletrace.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -29,7 +29,7 @@ serviceAccount:
   name: ""
 
 ports:
-  lupa-api:
+  teletrace-api:
     # -- Whether to enable port for the API (+frontend)
     enabled: true
     # -- Container port for API
@@ -79,7 +79,7 @@ ingress:
 
   # -- Ingress TLS configuration
   tls: []
-  #   - secretName: lupa-tls
+  #   - secretName: teletrace-tls
   #     hosts:
   #       - example.com
 
@@ -99,7 +99,7 @@ ingress:
   #             pathType: Prefix
   #             port: 4318
   #     tls:
-  #       - secretName: lupa-tls
+  #       - secretName: teletrace-tls
   #         hosts:
   #           - grpc.example.com
 
@@ -111,7 +111,7 @@ env:
   # ES_USERNAME: "elastic"
   # ES_PASSWORD: "password"
 
-# -- Lupa OpenTelemetry collector config
+# -- Teletrace OpenTelemetry collector config
 collectorConfig: |
   receivers:
     otlp:

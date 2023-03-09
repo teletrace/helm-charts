@@ -1,16 +1,16 @@
 {{- if .Values.autoscaling.enabled -}}
-{{- $apiVersion := include "lupa.hpa.apiVersion" . -}}
+{{- $apiVersion := include "teletrace.hpa.apiVersion" . -}}
 apiVersion: {{ $apiVersion }}
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "lupa.fullname" . }}
+  name: {{ include "teletrace.fullname" . }}
   labels:
-    {{- include "lupa.labels" . | nindent 4 }}
+    {{- include "teletrace.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "lupa.fullname" . }}
+    name: {{ include "teletrace.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:

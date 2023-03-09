@@ -17,12 +17,12 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   {{- if .name }}
-  name: {{ printf "%s-%s" (include "lupa.fullname" $) .name }}
+  name: {{ printf "%s-%s" (include "teletrace.fullname" $) .name }}
   {{- else }}
-  name: {{ include "lupa.fullname" $ }}
+  name: {{ include "teletrace.fullname" $ }}
   {{- end }}
   labels:
-    {{- include "lupa.labels" $ | nindent 4 }}
+    {{- include "teletrace.labels" $ | nindent 4 }}
   {{- with .annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -54,11 +54,11 @@ spec:
             backend:
               {{- if semverCompare ">=1.19-0" $kubeVersion }}
               service:
-                name: {{ include "lupa.fullname" $ }}
+                name: {{ include "teletrace.fullname" $ }}
                 port:
                   number: {{ .port }}
               {{- else }}
-              serviceName: {{ include "lupa.fullname" $ }}
+              serviceName: {{ include "teletrace.fullname" $ }}
               servicePort: {{ .port }}
               {{- end }}
           {{- end }}
