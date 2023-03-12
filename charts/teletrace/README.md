@@ -18,7 +18,7 @@ Teletrace Helm chart for Kubernetes
 | env | object | `{"API_PORT":"8080","DEBUG":"false"}` | Environment variables to add |
 | fullnameOverride | string | `""` | Overrides the chart computed fullname |
 | image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
-| image.repository | string | `"epsagon/lupa"` | Image repository |
+| image.repository | string | `"teletrace/teletrace"` | Image repository |
 | image.tag | string | `""` | Image tag. Overrides the image tag whose default is the chart appVersion. |
 | imagePullSecrets | list | `[]` | Image pull secrets for the image registry |
 | ingress.additionalIngresses | list | `[]` | Additional ingresses for when differently annotated ingress services are required. Each additional ingress needs "name" key set to something unique. Created if ingress.enabled set to true. |
