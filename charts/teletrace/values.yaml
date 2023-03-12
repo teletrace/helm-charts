@@ -9,7 +9,7 @@ fullnameOverride: ""
 
 image:
   # -- Image repository
-  repository: epsagon/lupa
+  repository: teletrace/teletrace
   # -- Image pull policy
   pullPolicy: IfNotPresent
   # -- Image tag.
