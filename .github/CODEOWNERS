@@ -1,6 +1,4 @@
-* @epsagon/team-zola
-
 LICENSE @haimrait
 .github/CODEOWNERS @haimrait
 
-charts/lupa/ @ophiryael
+charts/teletrace/ @ophiryael
