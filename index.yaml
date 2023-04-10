@@ -34,6 +34,16 @@ entries:
   teletrace:
   - apiVersion: v2
     appVersion: v0.6.0
+    created: "2023-04-10T06:59:05.44828827Z"
+    description: Teletrace Helm chart for Kubernetes
+    digest: ed7c3f0a7b8f0d6d5996e6dd0e9245319824a371fd903640e215ea6c5a89fb53
+    name: teletrace
+    type: application
+    urls:
+    - https://github.com/teletrace/helm-charts/releases/download/teletrace-0.6.0/teletrace-0.6.0.tgz
+    version: 0.6.0
+  - apiVersion: v2
+    appVersion: v0.6.0
     created: "2023-03-16T08:39:23.548907514Z"
     description: Teletrace Helm chart for Kubernetes
     digest: 281e4c247e563a5d6dceac9fa463d52fbc15478455269050fc42d7eaa3ec8db9
@@ -62,4 +72,4 @@ entries:
     urls:
     - https://github.com/epsagon/lupa-helm-charts/releases/download/teletrace-0.3.0/teletrace-0.3.0.tgz
     version: 0.3.0
-generated: "2023-03-16T08:39:23.548919314Z"
+generated: "2023-04-10T06:59:05.44831687Z"
