@@ -10,7 +10,7 @@ Please refer to Helm's [documentation](https://helm.sh/docs) to get started.
 Once Helm has been set up correctly, add the repo as follows:
 
 ```sh
-helm repo add teletrace https://teletrace.github.io/teletrace-helm-charts/
+helm repo add teletrace https://teletrace.github.io/helm-charts/
 ```
 
 If you had already added this repo earlier, run `helm repo update` to retrieve
